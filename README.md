@@ -73,7 +73,7 @@ http://localhost:3001/animais
 ```
 
 
-# // * frontedn: *//
+# // * frontend: *//
 
 ## Iniciar o frontend:
 
