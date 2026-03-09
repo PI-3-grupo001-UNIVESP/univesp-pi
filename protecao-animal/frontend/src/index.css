@@ -1,0 +1,210 @@
+body {
+  margin: 0;
+  background-color: #f3f3f3;
+  font-family: Georgia, serif;
+}
+
+/* HEADER */
+
+header {
+  background: white;
+  padding: 25px 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.logo {
+  font-size: 32px;
+  font-weight: bold;
+  color: #2b4c7e;
+}
+
+.logo span {
+  font-size: 14px;
+  color: #999;
+}
+
+nav button {
+  background: none;
+  border: none;
+  color: #e85a5a;
+  margin-left: 25px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+nav button:hover {
+  color: #c73d3d;
+}
+
+/* HERO HOME */
+
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 70px;
+}
+
+.hero-text {
+  max-width: 500px;
+}
+
+.hero-text h1 {
+  font-size: 60px;
+  color: #e85a5a;
+  font-style: italic;
+}
+
+.hero-text p {
+  margin-top: 20px;
+  font-size: 18px;
+}
+
+.hero-logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Controle TOTAL do tamanho aqui */
+.logo-img {
+  width: 100%;
+  max-width: 750px; /*  ALTERE AQUI para o tamanho desejado */
+  height: auto;
+  transition: 0.3s;
+}
+
+
+/* CONTEÚDO */
+
+.container {
+  padding: 60px;
+  text-align: center;
+}
+
+/* ===== TÍTULO PROFISSIONAL ===== */
+
+.titulo-pagina {
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 28px;
+  color: #2b4c7e;
+}
+
+/* ===== CARDS PROFISSIONAIS ===== */
+
+.card {
+  background: white;
+  border-radius: 20px;
+  width: 260px;
+  padding: 15px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+  transition: 0.3s;
+  text-align: center;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+/* Imagem bonita */
+
+.card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 15px;
+  margin-bottom: 10px;
+}
+
+/* Status */
+
+.status {
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.status.disponivel {
+  color: #2b8a3e;
+}
+
+.status.adotado {
+  color: #999;
+}
+
+/* Card adotado levemente diferente */
+
+.card.adotado {
+  opacity: 0.8;
+}
+
+/* GRID */
+
+.grid {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+/* FORMULÁRIOS */
+
+input, select {
+  padding: 10px;
+  margin: 10px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+button.primary {
+  background: #2b4c7e;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button.primary:hover {
+  background: #1f3d63;
+}
+
+/* Botões da área do admin */
+
+.admin-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-bottom: 40px;
+}
+
+/* FOOTER */
+
+.footer {
+  background: #1f3d63;
+  color: white;
+  padding: 40px 20px;
+  margin-top: 60px;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 30px;
+  text-align: center;
+}
+
+.footer h3 {
+  margin-bottom: 10px;
+}
+
+.footer p {
+  margin: 5px 0;
+  font-size: 14px;
+}
