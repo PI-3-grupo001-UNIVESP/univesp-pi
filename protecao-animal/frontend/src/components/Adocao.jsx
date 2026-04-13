@@ -1,8 +1,12 @@
 /*
   Aqui são as configurações da página do Adotante, que deve ser preenchido pelo
   voluntário do abrigo, sendo o acesso restrito ao admin,
-  OBS: precisa configurar que, ao ser adotado, o animal muda de status 
+  OBS: ao ser adotado, o animal muda de status 
   e isso deve ser sobreescrito na base
+*/
+
+/*
+  Página de registro de adoção
 */
 
 import { useEffect, useState } from "react";
@@ -13,25 +17,47 @@ export default function Adocao() {
   const [animalId, setAnimalId] = useState("");
   const [nomeAdotante, setNomeAdotante] = useState("");
 
-  useEffect(() => {
+  const carregarAnimais = () => {
     axios.get("http://localhost:3001/animais")
-      .then(res => setAnimais(res.data.filter(a => a.status !== "adotado")));
+      .then(res =>
+        setAnimais(res.data.filter(a => a.status !== "adotado"))
+      );
+  };
+
+  useEffect(() => {
+    carregarAnimais();
   }, []);
 
   const registrar = async () => {
-    await axios.post("http://localhost:3001/adocoes", {
-      animal_id: animalId,
-      nome_adotante: nomeAdotante
-    });
+    try {
+      if (!animalId || !nomeAdotante) {
+        return alert("Preencha todos os campos!");
+      }
 
-    alert("Adoção registrada!");
+      await axios.post("http://localhost:3001/adocoes", {
+        animal_id: animalId,
+        nome_adotante: nomeAdotante
+      });
+
+      alert("Adoção registrada com sucesso!");
+
+      setAnimalId("");
+      setNomeAdotante("");
+
+      // 🔄 Atualiza lista automaticamente
+      carregarAnimais();
+
+    } catch (error) {
+      console.error(error);
+      alert("Erro ao registrar adoção");
+    }
   };
 
   return (
     <div className="container">
-      <h2>Registrar Adoção</h2>
+      <h2 className="titulo-pagina">Registrar Adoção</h2>
 
-      <select onChange={e => setAnimalId(e.target.value)}>
+      <select value={animalId} onChange={e => setAnimalId(e.target.value)}>
         <option value="">Selecione o animal</option>
         {animais.map(a => (
           <option key={a.id} value={a.id}>
@@ -47,6 +73,7 @@ export default function Adocao() {
       />
 
       <br />
+
       <button className="primary" onClick={registrar}>
         Registrar
       </button>
