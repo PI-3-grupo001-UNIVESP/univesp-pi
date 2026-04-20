@@ -18,4 +18,4 @@ const listarAnimais = async (req, res) => {
 // Exporta a função para podermos usá-la no server.js
 module.exports = {
     listarAnimais
-};
+}
