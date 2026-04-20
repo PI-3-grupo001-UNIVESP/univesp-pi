@@ -1,5 +1,7 @@
+
+
 /*
-  Página da lista de animais disponíveis para adoação
+  Página da lista de animais disponíveis para adoção
 */
 
 import { useEffect, useState } from "react";
@@ -11,7 +13,8 @@ export default function Animais() {
 
   useEffect(() => {
     axios.get("http://localhost:3001/animais")
-      .then(res => setAnimais(res.data));
+      .then(res => setAnimais(res.data))
+      .catch(err => console.error(err));
   }, []);
 
   const disponiveis = animais.filter(a => a.status === "disponivel");
@@ -19,56 +22,63 @@ export default function Animais() {
 
   return (
     <PageWrapper>
-    <div className="container">
-      
-      {/* ===== DISPONÍVEIS ===== */}
-      <h2 className="titulo-pagina">🐾 Animais Disponíveis para Adoção</h2>
+      <div className="container">
 
-      <div className="grid">
-        {disponiveis.map(animal => (
-          <div className="card" key={animal.id}>
-            
-            {animal.imagem && (
-              <img
-                src={`http://localhost:3001/uploads/${animal.imagem}`}
-                alt={animal.nome}
-              />
-            )}
+        {/* ===== DISPONÍVEIS ===== */}
+        <h2 className="titulo-pagina">
+          🐾 Animais Disponíveis para Adoção
+        </h2>
 
-            <h3>{animal.nome}</h3>
-            <p>{animal.idade} anos</p>
-            <p className="status disponivel">Disponível</p>
-          </div>
-        ))}
+        <div className="grid">
+          {disponiveis.map(animal => (
+            <div className="card" key={animal.id}>
+
+              {animal.imagem && (
+                <img
+                  src={`http://localhost:3001/uploads/${animal.imagem}`}
+                  alt={animal.nome}
+                />
+              )}
+
+              <h3>{animal.nome}</h3>
+              <p>{animal.idade} anos</p>
+              <p className="status disponivel">Disponível</p>
+            </div>
+          ))}
+        </div>
+
+        {/* ===== ADOTADOS ===== */}
+        {adotados.length > 0 && (
+          <>
+            <h2
+              className="titulo-pagina"
+              style={{ marginTop: "60px" }}
+            >
+              ❤️ Já Adotados
+            </h2>
+
+            <div className="grid">
+              {adotados.map(animal => (
+                <div
+                  className="card adotado"
+                  key={animal.id}
+                >
+                  {animal.imagem && (
+                    <img
+                      src={`http://localhost:3001/uploads/${animal.imagem}`}
+                      alt={animal.nome}
+                    />
+                  )}
+
+                  <h3>{animal.nome}</h3>
+                  <p>{animal.idade} anos</p>
+                  <p className="status adotado">Adotado</p>
+                </div>
+              ))}
+            </div>
+          </>
+        )}
       </div>
-
-      {/* ===== ADOTADOS ===== */}
-      {adotados.length > 0 && (
-        <>
-          <h2 className="titulo-pagina" style={{marginTop: "60px"}}>
-            ❤️ Já Adotados
-          </h2>
-
-          <div className="grid">
-            {adotados.map(animal => (
-              <div className="card adotado" key={animal.id}>
-                
-                {animal.imagem && (
-                  <img
-                    src={`http://localhost:3001/uploads/${animal.imagem}`}
-                    alt={animal.nome}
-                  />
-                )}
-
-                <h3>{animal.nome}</h3>
-                <p>{animal.idade} anos</p>
-                <p className="status adotado">Adotado</p>
-              </div>
-            ))}
-          </div>
-        </>
-      )}
-    </div>
     </PageWrapper>
   );
 }

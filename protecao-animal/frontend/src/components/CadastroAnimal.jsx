@@ -12,20 +12,46 @@ export default function CadastroAnimal() {
   const [imagem, setImagem] = useState(null);
 
   const cadastrar = async () => {
-    const formData = new FormData();
-    formData.append("nome", nome);
-    formData.append("idade", idade);
-    formData.append("porte", porte);
-    formData.append("imagem", imagem);
+    try {
+      if (!nome || !idade || !porte) {
+        return alert("Preencha todos os campos!");
+      }
 
-    await axios.post("http://localhost:3001/animais", formData);
+      const formData = new FormData();
+      formData.append("nome", nome);
+      formData.append("idade", idade);
+      formData.append("porte", porte);
 
-    alert("Animal cadastrado!");
+      if (imagem) {
+        formData.append("imagem", imagem);
+      }
+
+      await axios.post("http://localhost:3001/animais", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data"
+        }
+      });
+
+      alert("Animal cadastrado com sucesso!");
+
+      // 🔄 limpar formulário
+      setNome("");
+      setIdade("");
+      setPorte("");
+      setImagem(null);
+
+      // 🔄 limpar input file manualmente
+      document.querySelector('input[type="file"]').value = "";
+
+    } catch (error) {
+      console.error(error);
+      alert("Erro ao cadastrar animal");
+    }
   };
 
   return (
     <div className="container">
-      <h2>Cadastrar Animal</h2>
+      <h2 className="titulo-pagina">Cadastrar Animal</h2>
 
       <input
         placeholder="Nome"
@@ -39,7 +65,7 @@ export default function CadastroAnimal() {
         onChange={e => setIdade(e.target.value)}
       />
 
-      <select onChange={e => setPorte(e.target.value)}>
+      <select value={porte} onChange={e => setPorte(e.target.value)}>
         <option value="">Selecione o porte</option>
         <option>Pequeno</option>
         <option>Médio</option>
@@ -52,6 +78,7 @@ export default function CadastroAnimal() {
       />
 
       <br />
+
       <button className="primary" onClick={cadastrar}>
         Salvar
       </button>
